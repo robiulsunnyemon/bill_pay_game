@@ -3,12 +3,15 @@ from contextlib import asynccontextmanager
 from src.bill_pay_game.database.db import initialize_database, close_database
 from src.bill_pay_game.session.routers.session import router as session_router
 from src.bill_pay_game.session_group.routers.session_group import router as session_group_router
+from fastapi.middleware.cors import CORSMiddleware
+
 
 @asynccontextmanager
 async def lifespan_context(_: FastAPI):
     await initialize_database()
     yield
     await close_database()
+
 
 app = FastAPI(
     prefix="/api",
@@ -17,6 +20,16 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan_context,
 )
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/",tags=["Root"])
 async def root():
