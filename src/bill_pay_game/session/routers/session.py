@@ -17,7 +17,7 @@ async def read_session():
     return db_sessions
 
 @router.get("/{id}", response_model=SessionResponse, status_code=status.HTTP_200_OK)
-async def read_session(session_id: int):
+async def read_session(session_id: str):
     db_sessions = await SessionModel.find_by_id(id).to_list()
     return db_sessions
 
