@@ -18,7 +18,7 @@ app = FastAPI(
     lifespan=lifespan_context,
 )
 
-@app.get("/")
+@app.get("/",tags=["Root"])
 async def root():
     return {"message": "Welcome to Bill Pay Game API!"}
 

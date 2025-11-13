@@ -1,9 +1,9 @@
-from fastapi import APIRouter,status,HTTPException,Depends
+from fastapi import APIRouter,status
 from typing import List
 from src.bill_pay_game.session.model.session import SessionModel
 from src.bill_pay_game.session.schemas.session import SessionResponse
 
-router = APIRouter(prefix="/session", tags=["session"])
+router = APIRouter(prefix="/session", tags=["Session"])
 @router.post("/", response_model=SessionResponse, status_code=status.HTTP_201_CREATED)
 async def create_session():
     new_session= SessionModel()
