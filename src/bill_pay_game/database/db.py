@@ -3,7 +3,7 @@ from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 from typing import Optional
 import os
-
+from src.bill_pay_game.wining_record.model.wining_record import WiningRecordModel
 from src.bill_pay_game.session.model.session import SessionModel
 from src.bill_pay_game.session_group.model.session_group import SessionGroupModel
 
@@ -25,8 +25,10 @@ async def initialize_database():
     await init_beanie(
         database=client[DATABASE_NAME],
         document_models=[
+            WiningRecordModel,
             SessionModel,
-            SessionGroupModel,
+            SessionGroupModel
+
         ],
     )
 
